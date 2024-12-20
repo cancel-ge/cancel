@@ -44,7 +44,7 @@ export default function RootLayout({
       <body className={robotoMono.className} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
