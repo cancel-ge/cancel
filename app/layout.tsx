@@ -1,11 +1,9 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, Roboto_Mono } from 'next/font/google';
+import { Roboto_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 import { EntriesProvider } from '@/lib/entries-context';
-
-const inter = Inter({ subsets: ['latin'] });
 
 const robotoMono = Roboto_Mono({
   subsets: ['latin'],
