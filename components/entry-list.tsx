@@ -44,7 +44,7 @@ export function EntryList() {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {displayedEntries.map((entry) => (
-          <Link key={entry.id} href={`/${entry.id}`}>
+          <Link key={entry.id} href={`/${entry.page_slug}`}>
             <Card className="cursor-pointer hover:shadow-lg transition-shadow h-full flex flex-col items-center justify-center p-6">
               {entry.image_url && (
                 <div className="w-40 h-40 mb-4">

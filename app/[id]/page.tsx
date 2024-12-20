@@ -5,10 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
 import { SocialLinkButton } from '@/components/social-link-button';
 
-export function generateStaticParams() {
-  return mockEntries.map((entry) => ({
-    id: entry.id,
-  }));
+export async function generateStaticParams() {
+  return []
 }
 
 export function generateMetadata({ params }: { params: { id: string } }): Metadata {
@@ -69,18 +67,18 @@ export default function EntryPage({ params }: { params: { id: string } }) {
             <CardContent className="space-y-4">
               <p className="text-muted-foreground">{entry.description}</p>
 
-              {entry.screenshot_url && (
+              {entry.fact_screenshot_url && (
                 <div className="rounded-lg overflow-hidden">
                   <img
-                    src={entry.screenshot_url}
+                    src={entry.fact_screenshot_url}
                     alt="Evidence"
                     className="w-full"
                   />
                 </div>
               )}
 
-              {entry.social_link && (
-                <SocialLinkButton url={entry.social_link} />
+              {entry.fact_link && (
+                <SocialLinkButton url={entry.fact_link} />
               )}
             </CardContent>
           </Card>

@@ -34,9 +34,12 @@ export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
     resolver: zodResolver(entryFormSchema),
     defaultValues: {
       title: "",
+      page_slug: "",
       type: "company",
       image_url: "",
-      screenshot_url: "",
+      image_file: null,
+      fact_screenshot_url: "",
+      fact_screenshot_file: null,
       fact_link: "",
     },
     mode: "onChange"
@@ -59,17 +62,20 @@ export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
       : values.image_url;
 
     // Get the screenshot URL if provided
-    const screenshotUrl = values.screenshot_file
-      ? URL.createObjectURL(values.screenshot_file)
-      : values.screenshot_url;
+    const screenshotUrl = values.fact_screenshot_file
+      ? URL.createObjectURL(values.fact_screenshot_file)
+      : values.fact_screenshot_url;
 
+    const { title, type, page_slug, ...rest } = values;
     await addEntry({
-      title: values.title,
-      type: values.type,
+      title,
+      page_slug,
+      type,
+      ...rest,
       image_url: imageUrl || "",
-      screenshot_url: screenshotUrl || "",
-      social_link: values.fact_link || undefined,
-      description: "", // Add a description field to your form if needed
+      fact_screenshot_url: screenshotUrl || "",
+      fact_link: values.fact_link || undefined,
+      description: "",
     });
     
     toast({
@@ -80,6 +86,7 @@ export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
     setStep(1);
     onOpenChange(false);
   } catch (error) {
+    console.error(error);
     toast({
       title: "Error",
       description: "Failed to submit entry. Please try again.",

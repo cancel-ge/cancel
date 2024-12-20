@@ -2,31 +2,31 @@ CREATE TABLE entries (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   created_at timestamptz DEFAULT now(),
   title text NOT NULL,
+  page_slug text NOT NULL,
   description text,
   image_url text,
-  fact_screenshot text,
+  fact_screenshot_url text,
   fact_link text,
   type text NOT NULL CHECK (type IN ('company', 'person')),
   status text NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'rejected')),
   CONSTRAINT require_evidence CHECK (
-    (fact_screenshot IS NOT NULL) OR (fact_link IS NOT NULL)
+    (fact_screenshot_url IS NOT NULL) OR (fact_link IS NOT NULL)
   )
 );
 
 -- Enable RLS
 ALTER TABLE entries ENABLE ROW LEVEL SECURITY;
 
--- Public can read approved entries
-CREATE POLICY "Public can view approved entries"
+-- Public can read all entries
+CREATE POLICY "Public can view all entries"
   ON entries
   FOR SELECT
-  USING (status = 'approved');
+  USING (true);
 
--- Authenticated users can create entries
-CREATE POLICY "Authenticated users can create entries"
+-- Public users can create entries
+CREATE POLICY "Public can create entries"
   ON entries
   FOR INSERT
-  TO authenticated
   WITH CHECK (true);
 
 -- Only admins can update/delete entries

@@ -58,7 +58,14 @@ export function StepOne({ form }: { form: any }) {
           <FormItem>
             <FormLabel>Name</FormLabel>
             <FormControl>
-              <Input placeholder="Enter name" {...field} />
+              <Input 
+                placeholder="Enter name" 
+                {...field} 
+                onChange={(e) => {
+                  field.onChange(e);
+                  form.setValue("page_slug", generateSlug(e.target.value));
+                }}
+              />
             </FormControl>
             {field.value && (
               <p className="text-sm text-muted-foreground">

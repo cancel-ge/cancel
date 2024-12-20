@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
-import { Entry } from '@/lib/types';
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+import { Entry } from "@/lib/types";
 
 export function useSupabaseEntries() {
   const [entries, setEntries] = useState<Entry[]>([]);
@@ -14,10 +14,10 @@ export function useSupabaseEntries() {
   async function fetchEntries() {
     try {
       const { data, error } = await supabase
-        .from('entries')
-        .select('*')
-        .eq('status', 'approved')
-        .order('created_at', { ascending: false });
+        .from("entries")
+        .select("*")
+        .eq("status", "approved")
+        .order("created_at", { ascending: false });
 
       if (error) throw error;
       setEntries(data || []);
@@ -28,11 +28,13 @@ export function useSupabaseEntries() {
     }
   }
 
-  async function addEntry(newEntry: Omit<Entry, 'id' | 'created_at' | 'status'>) {
+  async function addEntry(
+    newEntry: Omit<Entry, "id" | "created_at" | "status">
+  ) {
     try {
       const { data, error } = await supabase
-        .from('entries')
-        .insert([{ ...newEntry, status: 'pending' }])
+        .from("entries")
+        .insert([{ ...newEntry, status: "pending" }])
         .select()
         .single();
 
@@ -48,6 +50,6 @@ export function useSupabaseEntries() {
     loading,
     error,
     addEntry,
-    refreshEntries: fetchEntries
+    refreshEntries: fetchEntries,
   };
 }

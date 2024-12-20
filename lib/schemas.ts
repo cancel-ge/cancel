@@ -2,6 +2,7 @@ import * as z from "zod";
 
 export const entryFormSchema = z.object({
   title: z.string().min(2, "Name must be at least 2 characters"),
+  page_slug: z.string().min(1, "Page slug is required"),
   type: z.enum(["company", "person"]),
   image_url: z.string().optional(),
   image_file: z.any().optional(),

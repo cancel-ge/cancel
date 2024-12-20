@@ -8,6 +8,7 @@ import { EntriesProvider } from '@/lib/entries-context';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
   title: 'Cancel.ge - Exposing Those Silent on Georgian EU Aspirations',
   description: 'Archive of companies and public figures not actively supporting Georgian EU membership aspirations.',
   openGraph: {
@@ -22,6 +23,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Cancel.ge - Exposing Those Silent on Georgian EU Aspirations',
     description: 'Archive of companies and public figures not actively supporting Georgian EU membership aspirations.',
+  },
+  icons: {
+    icon: '/favicon.ico',
   },
 };
 
