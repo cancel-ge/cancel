@@ -8,7 +8,7 @@ import { SearchBar } from '@/components/search-bar';
 import Link from 'next/link';
 
 export function EntryList() {
-  const { entries } = useEntries();
+  const { entries, loading, error } = useEntries();
   
   const {
     search,
@@ -22,15 +22,24 @@ export function EntryList() {
 
   const displayedEntries = useInfiniteScroll(filteredEntries);
 
+  if (loading) {
+    return <div className="text-center py-8">Loading entries...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center py-8 text-red-500">Error loading entries: {error.message}</div>;
+  }
+
   return (
     <>
       <SearchBar
         search={search}
         onSearchChange={setSearch}
         type={type}
-        onTypeChange={setType}
+        onTypeChange={(value: string) => setType(value as "company" | "person" | "all")}
         sortOrder={sortOrder}
         onSortOrderChange={setSortOrder}
+        onShuffle={() => {/* Implement shuffle logic here */}}
       />
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -43,51 +43,52 @@ export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
   });
 
   const onSubmit = async (values: z.infer<typeof entryFormSchema>) => {
-    if (step === 1) {
-      const isValid = await form.trigger(['type', 'title', 'image_url', 'image_file'], { shouldFocus: true });
-      if (isValid) {
-        setStep(2);
-      }
-      return;
+  if (step === 1) {
+    const isValid = await form.trigger(['type', 'title', 'image_url', 'image_file'], { shouldFocus: true });
+    if (isValid) {
+      setStep(2);
     }
+    return;
+  }
 
-    setIsSubmitting(true);
-    try {
-      // Get the image URL - either from file or direct URL input
-      const imageUrl = values.image_file 
-        ? URL.createObjectURL(values.image_file)
-        : values.image_url;
+  setIsSubmitting(true);
+  try {
+    // Get the image URL - either from file or direct URL input
+    const imageUrl = values.image_file 
+      ? URL.createObjectURL(values.image_file)
+      : values.image_url;
 
-      // Get the screenshot URL if provided
-      const screenshotUrl = values.screenshot_file
-        ? URL.createObjectURL(values.screenshot_file)
-        : values.screenshot_url;
+    // Get the screenshot URL if provided
+    const screenshotUrl = values.screenshot_file
+      ? URL.createObjectURL(values.screenshot_file)
+      : values.screenshot_url;
 
-      addEntry({
-        title: values.title,
-        type: values.type,
-        image_url: imageUrl || "",
-        screenshot_url: screenshotUrl || "",
-        social_link: values.fact_link || undefined,
-      });
-      
-      toast({
-        title: "Success",
-        description: "Entry submitted successfully.",
-      });
-      form.reset();
-      setStep(1);
-      onOpenChange(false);
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to submit entry. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    await addEntry({
+      title: values.title,
+      type: values.type,
+      image_url: imageUrl || "",
+      screenshot_url: screenshotUrl || "",
+      social_link: values.fact_link || undefined,
+      description: "", // Add a description field to your form if needed
+    });
+    
+    toast({
+      title: "Success",
+      description: "Entry submitted for review.",
+    });
+    form.reset();
+    setStep(1);
+    onOpenChange(false);
+  } catch (error) {
+    toast({
+      title: "Error",
+      description: "Failed to submit entry. Please try again.",
+      variant: "destructive",
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <Dialog open={open} onOpenChange={(open) => {

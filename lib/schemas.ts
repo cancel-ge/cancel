@@ -5,8 +5,8 @@ export const entryFormSchema = z.object({
   type: z.enum(["company", "person"]),
   image_url: z.string().optional(),
   image_file: z.any().optional(),
-  screenshot_url: z.string().optional(),
-  screenshot_file: z.any().optional(),
+  fact_screenshot_url: z.string().optional(),
+  fact_screenshot_file: z.any().optional(),
   fact_link: z.string().url("Must be a valid URL").optional().or(z.string().length(0)),
 }).superRefine((data, ctx) => {
   // Check if either image_url or image_file is present
@@ -32,14 +32,14 @@ export const entryFormSchema = z.object({
   }
 
   // Validate screenshot_url format only if it's provided and no file is uploaded
-  if (data.screenshot_url && !data.screenshot_file) {
+  if (data.fact_screenshot_url && !data.fact_screenshot_file) {
     try {
-      new URL(data.screenshot_url);
+      new URL(data.fact_screenshot_url);
     } catch {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "Must be a valid URL",
-        path: ["screenshot_url"]
+        path: ["fact_screenshot_url"]
       });
     }
   }

@@ -9,16 +9,16 @@ export function StepTwo({ form }: { form: any }) {
     <div className="space-y-6">
       <FormField
         control={form.control}
-        name="screenshot_url"
+        name="fact_screenshot_url"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Screenshot (Optional)</FormLabel>
+            <FormLabel>Fact Screenshot (Optional)</FormLabel>
             <FormControl>
               <ImageInput
                 urlValue={field.value || ""}
-                fileValue={form.watch("screenshot_file")}
-                onUrlChange={(value) => form.setValue("screenshot_url", value)}
-                onFileChange={(file) => form.setValue("screenshot_file", file)}
+                fileValue={form.watch("fact_screenshot_file")}
+                onUrlChange={(value) => form.setValue("fact_screenshot_url", value)}
+                onFileChange={(file) => form.setValue("fact_screenshot_file", file)}
                 placeholder="Enter screenshot URL or upload"
               />
             </FormControl>
