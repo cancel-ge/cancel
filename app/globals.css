@@ -69,3 +69,16 @@
     @apply outline-none !important;
   }
 }
+
+@keyframes skeleton-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton-shimmer {
+  animation: skeleton-shimmer 2s infinite;
+}

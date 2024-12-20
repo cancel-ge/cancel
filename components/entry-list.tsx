@@ -1,11 +1,21 @@
 "use client";
 
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { useEntries } from '@/lib/entries-context';
 import { useSearch } from '@/lib/hooks/use-search';
 import { useInfiniteScroll } from '@/lib/hooks/use-infinite-scroll';
 import { SearchBar } from '@/components/search-bar';
 import Link from 'next/link';
+
+function EntryCardSkeleton() {
+  return (
+    <Card className="cursor-pointer h-full flex flex-col items-center justify-center p-6 relative overflow-hidden">
+      <div className="w-40 h-40 mb-4 rounded-full bg-muted animate-pulse" />
+      <div className="h-6 w-3/4 bg-muted rounded animate-pulse" />
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-background/10 to-transparent skeleton-shimmer" />
+    </Card>
+  );
+}
 
 export function EntryList() {
   const { entries, loading, error } = useEntries();
@@ -23,7 +33,24 @@ export function EntryList() {
   const displayedEntries = useInfiniteScroll(filteredEntries);
 
   if (loading) {
-    return <div className="text-center py-8">Loading entries...</div>;
+    return (
+      <>
+        <div className="mb-6 animate-pulse">
+          <div className="w-full max-w-md h-10 bg-muted rounded-md mb-4" />
+          <div className="flex gap-4">
+            <div className="w-[110px] h-10 bg-muted rounded-md" />
+            <div className="w-[110px] h-10 bg-muted rounded-md" />
+            <div className="w-[110px] h-10 bg-muted rounded-md" />
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[...Array(6)].map((_, i) => (
+            <EntryCardSkeleton key={i} />
+          ))}
+        </div>
+      </>
+    );
   }
 
   if (error) {

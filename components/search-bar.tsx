@@ -31,41 +31,41 @@ export function SearchBar({
   onShuffle
 }: SearchBarProps) {
   return (
-    <div className="flex flex-col md:flex-row gap-4 mb-6">
-      <div className="flex-1">
-        <Input
-          placeholder="Search by title or description..."
-          value={search}
-          onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full"
-        />
+    <div className="flex flex-col gap-4 mb-6">
+      <Input
+        placeholder="Search by title or description..."
+        value={search}
+        onChange={(e) => onSearchChange(e.target.value)}
+        className="w-full"
+      />
+      <div className="flex flex-row gap-2 overflow-x-auto pb-2 -mb-2">
+        <Select value={type} onValueChange={onTypeChange}>
+          <SelectTrigger className="w-[110px] flex-shrink-0">
+            <SelectValue placeholder="Filter" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All</SelectItem>
+            <SelectItem value="company">Companies</SelectItem>
+            <SelectItem value="person">People</SelectItem>
+          </SelectContent>
+        </Select>
+        <Button
+          variant="outline"
+          onClick={() => onSortOrderChange(sortOrder === 'desc' ? 'asc' : 'desc')}
+          className="w-[110px] flex-shrink-0"
+        >
+          <ArrowUpDown className="mr-2 h-4 w-4" />
+          {sortOrder === 'desc' ? 'Newest' : 'Oldest'}
+        </Button>
+        {/* <Button
+          variant="outline"
+          onClick={onShuffle}
+          className="w-[110px] flex-shrink-0"
+        >
+          <Shuffle className="mr-2 h-4 w-4" />
+          Shuffle
+        </Button> */}
       </div>
-      <Select value={type} onValueChange={onTypeChange}>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Filter by type" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="all">All</SelectItem>
-          <SelectItem value="company">Companies</SelectItem>
-          <SelectItem value="person">People</SelectItem>
-        </SelectContent>
-      </Select>
-      <Button
-        variant="outline"
-        onClick={onShuffle}
-        className="w-[180px]"
-      >
-        <Shuffle className="mr-2 h-4 w-4" />
-        Shuffle
-      </Button>
-      <Button
-        variant="outline"
-        onClick={() => onSortOrderChange(sortOrder === 'desc' ? 'asc' : 'desc')}
-        className="w-[180px]"
-      >
-        <ArrowUpDown className="mr-2 h-4 w-4" />
-        {sortOrder === 'desc' ? 'Newest First' : 'Oldest First'}
-      </Button>
     </div>
   );
 }
