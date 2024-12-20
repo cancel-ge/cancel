@@ -19,6 +19,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useEntries } from "@/lib/entries-context";
 import { StepOne } from "./add-entry-dialog/step-one";
 import { StepTwo } from "./add-entry-dialog/step-two";
+import { uploadImage } from '@/lib/supabase-storage';
 
 interface AddEntryDialogProps {
   open: boolean;
@@ -57,15 +58,17 @@ export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
 
   setIsSubmitting(true);
   try {
-    // Get the image URL - either from file or direct URL input
-    const imageUrl = values.image_file 
-      ? URL.createObjectURL(values.image_file)
-      : values.image_url;
+    // Handle profile image upload
+    let imageUrl = values.image_url;
+    if (values.image_file) {
+      imageUrl = await uploadImage(values.image_file, 'profiles', 200, 200);
+    }
 
-    // Get the screenshot URL if provided
-    const screenshotUrl = values.fact_screenshot_file
-      ? URL.createObjectURL(values.fact_screenshot_file)
-      : values.fact_screenshot_url;
+    // Handle screenshot upload
+    let screenshotUrl = values.fact_screenshot_url;
+    if (values.fact_screenshot_file) {
+      screenshotUrl = await uploadImage(values.fact_screenshot_file, 'screenshots', 1600, 1600);
+    }
 
     const { title, type, page_slug, ...rest } = values;
     await addEntry({
@@ -108,10 +111,10 @@ export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>
-            {step === 1 ? "Add New Entry" : "Additional Information (Optional)"}
+            {step === 1 ? "Cancel a company or person" : "Additional Information"}
           </DialogTitle>
           <DialogDescription>
-            {step === 1 ? "Add a new entry to the database." : "Add additional information to the entry."}
+            {step === 1 ? "Add a company or person to the database." : "Add more details about the company or person here or leave blank."}
           </DialogDescription>
         </DialogHeader>
 

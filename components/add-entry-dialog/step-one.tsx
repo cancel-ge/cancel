@@ -89,7 +89,7 @@ export function StepOne({ form }: { form: any }) {
                 fileValue={form.watch("image_file")}
                 onUrlChange={(value) => form.setValue("image_url", value)}
                 onFileChange={(file) => form.setValue("image_file", file)}
-                placeholder="Enter profile image URL or Upload"
+                placeholder="Enter profile image URL or upload"
               />
             </FormControl>
             <FormMessage />
