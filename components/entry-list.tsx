@@ -5,6 +5,8 @@ import { useEntries } from '@/lib/entries-context';
 import { useSearch } from '@/lib/hooks/use-search';
 import { useInfiniteScroll } from '@/lib/hooks/use-infinite-scroll';
 import { SearchBar } from '@/components/search-bar';
+import { AddEntryDialog } from '@/components/add-entry-dialog';
+import { useState } from 'react';
 import Link from 'next/link';
 
 function EntryCardSkeleton() {
@@ -18,6 +20,7 @@ function EntryCardSkeleton() {
 }
 
 export function EntryList() {
+  const [showAddDialog, setShowAddDialog] = useState(false);
   const { entries, loading, error } = useEntries();
   
   const {
@@ -36,12 +39,21 @@ export function EntryList() {
   if (loading) {
     return (
       <>
-        <div className="mb-6 animate-pulse">
-          <div className="w-full max-w-md h-10 bg-muted rounded-md mb-4" />
-          <div className="flex gap-4">
-            <div className="w-[110px] h-10 bg-muted rounded-md" />
-            <div className="w-[110px] h-10 bg-muted rounded-md" />
-            <div className="w-[110px] h-10 bg-muted rounded-md" />
+        <div className="flex flex-col gap-4 mb-6">
+          {/* Search input skeleton */}
+          <div className="w-full h-10 bg-muted rounded-md" />
+          
+          {/* Buttons row skeleton */}
+          <div className="flex flex-row justify-between gap-2">
+            {/* Add Cancel button skeleton */}
+            <div className="w-[120px] h-10 bg-muted rounded-md" />
+            
+            {/* Right side filters skeleton */}
+            <div className="flex flex-row gap-2">
+              <div className="w-[110px] h-10 bg-muted rounded-md" />
+              <div className="w-[110px] h-10 bg-muted rounded-md" />
+              <div className="w-[110px] h-10 bg-muted rounded-md" />
+            </div>
           </div>
         </div>
         
@@ -68,6 +80,7 @@ export function EntryList() {
         sortOrder={sortOrder}
         onSortOrderChange={setSortOrder}
         onShuffle={onShuffle}
+        onAddClick={() => setShowAddDialog(true)}
       />
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -88,6 +101,11 @@ export function EntryList() {
           </Link>
         ))}
       </div>
+
+      <AddEntryDialog 
+        open={showAddDialog} 
+        onOpenChange={setShowAddDialog} 
+      />
     </>
   );
 }
