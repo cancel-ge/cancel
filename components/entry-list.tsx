@@ -28,7 +28,7 @@ export function EntryList() {
     sortOrder,
     setSortOrder,
     filteredEntries
-  } = useSearch(entries);
+  } = useSearch();
 
   const displayedEntries = useInfiniteScroll(filteredEntries);
 

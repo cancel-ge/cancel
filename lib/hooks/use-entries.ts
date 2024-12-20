@@ -1,23 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/lib/supabase";
 import { Entry } from "@/lib/types";
+
+interface FetchParams {
+  search?: string;
+  type?: 'all' | 'company' | 'person';
+  sortOrder?: 'desc' | 'asc';
+}
 
 export function useSupabaseEntries() {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
-  useEffect(() => {
-    fetchEntries();
-  }, []);
-
-  async function fetchEntries() {
+  const fetchEntries = useCallback(async (params?: FetchParams) => {
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from("entries")
         .select("*")
-        .eq("status", "approved")
-        .order("created_at", { ascending: false });
+        .eq("status", "approved");
+
+      if (params?.type && params.type !== 'all') {
+        query = query.eq('type', params.type);
+      }
+
+      if (params?.search) {
+        query = query.ilike('title', `%${params.search}%`);
+      }
+
+      query = query.order('created_at', { 
+        ascending: params?.sortOrder === 'asc' 
+      });
+
+      const { data, error } = await query;
 
       if (error) throw error;
       setEntries(data || []);
@@ -26,7 +41,11 @@ export function useSupabaseEntries() {
     } finally {
       setLoading(false);
     }
-  }
+  }, []);
+
+  useEffect(() => {
+    fetchEntries();
+  }, [fetchEntries]);
 
   async function addEntry(
     newEntry: Omit<Entry, "id" | "created_at" | "status">

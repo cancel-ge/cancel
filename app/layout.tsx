@@ -1,11 +1,18 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Roboto_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 import { EntriesProvider } from '@/lib/entries-context';
 
 const inter = Inter({ subsets: ['latin'] });
+
+const robotoMono = Roboto_Mono({
+  subsets: ['latin'],
+  weight: ['100', '300', '400', '500', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-roboto',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
@@ -36,7 +43,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className} suppressHydrationWarning>
+      <body className={robotoMono.className} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

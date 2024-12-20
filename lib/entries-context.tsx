@@ -9,7 +9,7 @@ interface EntriesContextType {
   loading: boolean;
   error: Error | null;
   addEntry: (entry: Omit<Entry, 'id' | 'created_at' | 'status'>) => Promise<Entry>;
-  refreshEntries: () => Promise<void>;
+  refreshEntries: (params?: { search?: string; type?: 'all' | 'company' | 'person'; sortOrder?: 'desc' | 'asc' }) => Promise<void>;
 }
 
 const EntriesContext = createContext<EntriesContextType | undefined>(undefined);
