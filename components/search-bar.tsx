@@ -33,7 +33,7 @@ export function SearchBar({
   return (
     <div className="flex flex-col gap-4 mb-6">
       <Input
-        placeholder="Search by title or description..."
+        placeholder="Search by title..."
         value={search}
         onChange={(e) => onSearchChange(e.target.value)}
         className="w-full"
@@ -57,14 +57,14 @@ export function SearchBar({
           <ArrowUpDown className="mr-2 h-4 w-4" />
           {sortOrder === 'desc' ? 'Newest' : 'Oldest'}
         </Button>
-        {/* <Button
+        <Button
           variant="outline"
           onClick={onShuffle}
           className="w-[110px] flex-shrink-0"
         >
           <Shuffle className="mr-2 h-4 w-4" />
           Shuffle
-        </Button> */}
+        </Button>
       </div>
     </div>
   );

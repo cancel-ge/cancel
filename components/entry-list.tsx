@@ -27,6 +27,7 @@ export function EntryList() {
     setType,
     sortOrder,
     setSortOrder,
+    onShuffle,
     filteredEntries
   } = useSearch();
 
@@ -66,7 +67,7 @@ export function EntryList() {
         onTypeChange={(value: string) => setType(value as "company" | "person" | "all")}
         sortOrder={sortOrder}
         onSortOrderChange={setSortOrder}
-        onShuffle={() => {/* Implement shuffle logic here */}}
+        onShuffle={onShuffle}
       />
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

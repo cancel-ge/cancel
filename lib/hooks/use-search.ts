@@ -11,9 +11,9 @@ export function useSearch() {
   const [sortOrder, setSortOrder] = useState<'desc' | 'asc'>('desc');
 
   const debouncedRefresh = useMemo(
-    () => debounce((params: { search?: string; type?: 'all' | 'company' | 'person'; sortOrder?: 'desc' | 'asc' }) => {
+    () => debounce((params: { search?: string; type?: 'all' | 'company' | 'person'; sortOrder?: 'desc' | 'asc', shuffle?: boolean }) => {
       refreshEntries(params);
-    }, 500),
+    }, 300),
     [refreshEntries]
   );
 
@@ -21,13 +21,24 @@ export function useSearch() {
     debouncedRefresh({
       search,
       type,
-      sortOrder
+      sortOrder,
+      shuffle: false
     });
     
     return () => {
       debouncedRefresh.cancel();
     };
   }, [search, type, sortOrder, debouncedRefresh]);
+
+  const handleShuffle = () => {
+    debouncedRefresh.cancel();
+    refreshEntries({
+      search,
+      type,
+      sortOrder,
+      shuffle: true,
+    });
+  };
 
   return {
     search,
@@ -36,7 +47,8 @@ export function useSearch() {
     setType,
     sortOrder,
     setSortOrder,
-    filteredEntries: entries, // Now entries are already filtered from backend
+    onShuffle: handleShuffle,
+    filteredEntries: entries,
   };
 }
 

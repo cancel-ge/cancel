@@ -6,6 +6,7 @@ interface FetchParams {
   search?: string;
   type?: 'all' | 'company' | 'person';
   sortOrder?: 'desc' | 'asc';
+  shuffle?: boolean;
 }
 
 export function useSupabaseEntries() {
@@ -15,6 +16,21 @@ export function useSupabaseEntries() {
 
   const fetchEntries = useCallback(async (params?: FetchParams) => {
     try {
+      if (params?.shuffle) {
+        const { data, error } = await supabase
+          .from("entries")
+          .select("*")
+          .eq("status", "approved")
+          .then(result => ({
+            ...result,
+            data: result.data?.sort(() => Math.random() - 0.5)
+          }));
+
+        if (error) throw error;
+        setEntries(data || []);
+        return;
+      }
+
       let query = supabase
         .from("entries")
         .select("*")
