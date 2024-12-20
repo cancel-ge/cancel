@@ -11,6 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
@@ -109,6 +110,9 @@ export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
           <DialogTitle>
             {step === 1 ? "Add New Entry" : "Additional Information (Optional)"}
           </DialogTitle>
+          <DialogDescription>
+            {step === 1 ? "Add a new entry to the database." : "Add additional information to the entry."}
+          </DialogDescription>
         </DialogHeader>
 
         <Form {...form}>

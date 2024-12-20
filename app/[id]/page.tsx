@@ -1,15 +1,17 @@
 "use client";
 
 import { notFound } from 'next/navigation';
+import { use } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
 import { SocialLinkButton } from '@/components/social-link-button';
 import { useEntries } from '@/lib/entries-context';
 import { useEffect } from 'react';
 
-export default function EntryPage({ params }: { params: { id: string } }) {
+export default function EntryPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const { entries, loading, error } = useEntries();
-  const entry = entries.find(e => e.page_slug === params.id);
+  const entry = entries.find(e => e.page_slug === id);
 
   useEffect(() => {
     // If we have entries but can't find the requested one, show 404
