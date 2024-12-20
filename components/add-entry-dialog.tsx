@@ -71,7 +71,6 @@ export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
       title,
       page_slug,
       type,
-      ...rest,
       image_url: imageUrl || "",
       fact_screenshot_url: screenshotUrl || "",
       fact_link: values.fact_link || undefined,

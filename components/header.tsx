@@ -2,8 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
-import { Plus } from "lucide-react";
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Plus, Facebook, Instagram, Twitter } from "lucide-react";
 import Link from "next/link";
 import { AddEntryDialog } from "@/components/add-entry-dialog";
 import { useState } from "react";
@@ -22,13 +21,13 @@ export function Header() {
 
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://facebook.com/cancel.ge" target="_blank" rel="noopener noreferrer">
                 <Facebook className="h-5 w-5 text-muted-foreground hover:text-foreground" />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://instagram.com/cancel.ge" target="_blank" rel="noopener noreferrer">
                 <Instagram className="h-5 w-5 text-muted-foreground hover:text-foreground" />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://x.com/cancelge" target="_blank" rel="noopener noreferrer">
                 <Twitter className="h-5 w-5 text-muted-foreground hover:text-foreground" />
               </a>
             </div>
