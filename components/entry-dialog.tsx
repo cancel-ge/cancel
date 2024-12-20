@@ -14,8 +14,8 @@ interface Entry {
   title: string;
   description: string;
   image_url: string;
-  screenshot_url: string;
-  social_link: string;
+  fact_screenshot_url: string;
+  fact_url: string;
   type: 'company' | 'person';
 }
 
@@ -47,24 +47,24 @@ export function EntryDialog({ entry, open, onOpenChange }: EntryDialogProps) {
         <div className="space-y-4">
           <p className="text-muted-foreground">{entry.description}</p>
 
-          {entry.screenshot_url && (
+          {entry.fact_screenshot_url && (
             <div className="rounded-lg overflow-hidden">
               <img
-                src={entry.screenshot_url}
+                src={entry.fact_screenshot_url}
                 alt="Evidence"
                 className="w-full"
               />
             </div>
           )}
 
-          {entry.social_link && (
+          {entry.fact_url && (
             <Button
               variant="outline"
               className="w-full"
-              onClick={() => window.open(entry.social_link, '_blank')}
+              onClick={() => window.open(entry.fact_url, '_blank')}
             >
               <ExternalLink className="mr-2 h-4 w-4" />
-              View Original Post
+              View Fact
             </Button>
           )}
         </div>

@@ -1,10 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
   eslint: {
     ignoreDuringBuilds: true,
   },
   images: { unoptimized: true },
+  webpack: (config, { dev }) => {
+    if (dev) {
+      config.watchOptions = {
+        ignored: /node_modules/,
+        poll: 1000,
+      }
+    }
+    return config
+  },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

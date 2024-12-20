@@ -1,12 +1,20 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, ReactNode } from 'react';
 import { Entry } from './types';
-import { mockEntries } from './mock-data';
+import { useSupabaseEntries } from './hooks/use-entries';
 
 interface EntriesContextType {
   entries: Entry[];
-  addEntry: (entry: Omit<Entry, 'id' | 'created_at'>) => void;
+  loading: boolean;
+  error: Error | null;
+  addEntry: (entry: Omit<Entry, 'id' | 'created_at' | 'status'>) => Promise<Entry>;
+  refreshEntries: (params?: { 
+    search?: string; 
+    type?: 'all' | 'company' | 'person'; 
+    sortOrder?: 'desc' | 'asc';
+    shuffle?: boolean;
+  }) => Promise<void>;
 }
 
 const EntriesContext = createContext<EntriesContextType | undefined>(undefined);
@@ -20,25 +28,10 @@ export function useEntries() {
 }
 
 export function EntriesProvider({ children }: { children: ReactNode }) {
-  const [entries, setEntries] = useState<Entry[]>(mockEntries);
-
-  const addEntry = (newEntry: Omit<Entry, 'id' | 'created_at'>) => {
-    // Generate a URL-safe ID based on just the title
-    const id = newEntry.title.toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/(^-|-$)/g, '');
-      
-    const entry: Entry = {
-      ...newEntry,
-      id,
-      created_at: new Date().toISOString(),
-    };
-    
-    setEntries(prev => [entry, ...prev]);
-  };
+  const { entries, loading, error, addEntry, refreshEntries } = useSupabaseEntries();
 
   return (
-    <EntriesContext.Provider value={{ entries, addEntry }}>
+    <EntriesContext.Provider value={{ entries, loading, error, addEntry, refreshEntries }}>
       {children}
     </EntriesContext.Provider>
   );

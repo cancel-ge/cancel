@@ -58,7 +58,14 @@ export function StepOne({ form }: { form: any }) {
           <FormItem>
             <FormLabel>Name</FormLabel>
             <FormControl>
-              <Input placeholder="Enter name" {...field} />
+              <Input 
+                placeholder="Enter name" 
+                {...field} 
+                onChange={(e) => {
+                  field.onChange(e);
+                  form.setValue("page_slug", generateSlug(e.target.value));
+                }}
+              />
             </FormControl>
             {field.value && (
               <p className="text-sm text-muted-foreground">
@@ -80,14 +87,8 @@ export function StepOne({ form }: { form: any }) {
               <ImageInput
                 urlValue={field.value || ""}
                 fileValue={form.watch("image_file")}
-                onUrlChange={(value) => {
-                  field.onChange(value);
-                  form.setValue("image_file", undefined);
-                }}
-                onFileChange={(file) => {
-                  form.setValue("image_file", file);
-                  field.onChange("");
-                }}
+                onUrlChange={(value) => form.setValue("image_url", value)}
+                onFileChange={(file) => form.setValue("image_file", file)}
                 placeholder="Enter profile image URL or upload"
               />
             </FormControl>
