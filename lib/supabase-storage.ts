@@ -14,15 +14,19 @@ export async function processAndUploadImage(
       : input;
 
     const resizedBlob = await resizeImage(file, maxWidth, maxHeight);
-    const resizedFile = new File([resizedBlob], file.name, { type: file.type });
-
-    // Get file extension from original file
-    const fileExt = file.name.split('.').pop() || 
-      (file.type.split('/')[1] || 'jpg');
+    
+    // Determine proper extension from content type
+    const contentType = resizedBlob.type;
+    const ext = contentType === 'image/jpeg' ? 'jpg' 
+              : contentType === 'image/png' ? 'png'
+              : contentType === 'image/webp' ? 'webp'
+              : 'jpg';
 
     // Create filename based on page slug and type
     const suffix = bucket === 'profiles' ? 'profile' : 'screenshot';
-    const fileName = `${pageSlug}-${suffix}.${fileExt}`;
+    const fileName = `${pageSlug}-${suffix}.${ext}`;
+
+    const resizedFile = new File([resizedBlob], fileName, { type: contentType });
 
     // Use upsert-like behavior: remove existing file if it exists
     const { data: existingFiles } = await supabase.storage
