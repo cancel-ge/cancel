@@ -15,7 +15,7 @@ interface Entry {
   description: string;
   image_url: string;
   fact_screenshot_url: string;
-  fact_link: string;
+  fact_url: string;
   type: 'company' | 'person';
 }
 
@@ -57,14 +57,14 @@ export function EntryDialog({ entry, open, onOpenChange }: EntryDialogProps) {
             </div>
           )}
 
-          {entry.fact_link && (
+          {entry.fact_url && (
             <Button
               variant="outline"
               className="w-full"
-              onClick={() => window.open(entry.fact_link, '_blank')}
+              onClick={() => window.open(entry.fact_url, '_blank')}
             >
               <ExternalLink className="mr-2 h-4 w-4" />
-              View Original Post
+              View Fact
             </Button>
           )}
         </div>

@@ -15,7 +15,7 @@ export function SocialLinkButton({ url }: SocialLinkButtonProps) {
       onClick={() => window.open(url, '_blank')}
     >
       <ExternalLink className="mr-2 h-4 w-4" />
-      View Original Post
+      View Fact
     </Button>
   );
 }

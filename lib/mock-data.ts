@@ -8,7 +8,7 @@ export const mockEntries: Entry[] = [
     image_url: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
     type: 'company',
     created_at: '2024-03-20T12:00:00Z',
-    fact_link: 'https://example.com',
+    fact_url: 'https://example.com',
     status: 'approved'
   },
   {
@@ -18,7 +18,7 @@ export const mockEntries: Entry[] = [
     image_url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
     type: 'person',
     created_at: '2024-03-19T12:00:00Z',
-    fact_link: 'https://example.com',
+    fact_url: 'https://example.com',
     status: 'approved'
   }
 ];

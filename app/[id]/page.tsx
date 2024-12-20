@@ -97,8 +97,8 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
                 </div>
               )}
 
-              {entry.fact_link && (
-                <SocialLinkButton url={entry.fact_link} />
+              {entry.fact_url && (
+                <SocialLinkButton url={entry.fact_url} />
               )}
             </CardContent>
           </Card>

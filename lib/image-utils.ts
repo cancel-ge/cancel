@@ -37,4 +37,21 @@ export async function resizeImage(file: File, maxWidth: number, maxHeight: numbe
     
     img.onerror = () => reject(new Error('Failed to load image'));
   });
+}
+
+export async function downloadImage(url: string): Promise<File> {
+  // Use our proxy endpoint instead of direct fetch
+  const response = await fetch('/api/proxy-image', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ url }),
+  });
+
+  if (!response.ok) throw new Error('Failed to download image');
+  
+  const blob = await response.blob();
+  const filename = url.split('/').pop() || 'image';
+  return new File([blob], filename, { type: blob.type || 'image/jpeg' });
 } 

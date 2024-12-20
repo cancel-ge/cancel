@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { entryFormSchema } from "@/lib/schemas";
@@ -19,7 +19,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useEntries } from "@/lib/entries-context";
 import { StepOne } from "./add-entry-dialog/step-one";
 import { StepTwo } from "./add-entry-dialog/step-two";
-import { uploadImage } from '@/lib/supabase-storage';
+import { processAndUploadImage, deleteUploadedFile } from '@/lib/supabase-storage';
 
 interface AddEntryDialogProps {
   open: boolean;
@@ -42,72 +42,130 @@ export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
       image_file: null,
       fact_screenshot_url: "",
       fact_screenshot_file: null,
-      fact_link: "",
+      fact_url: "",
     },
     mode: "onChange"
   });
 
   const onSubmit = async (values: z.infer<typeof entryFormSchema>) => {
-  if (step === 1) {
-    const isValid = await form.trigger(['type', 'title', 'image_url', 'image_file'], { shouldFocus: true });
-    if (isValid) {
-      setStep(2);
-    }
-    return;
-  }
-
-  setIsSubmitting(true);
-  try {
-    // Handle profile image upload
-    let imageUrl = values.image_url;
-    if (values.image_file) {
-      imageUrl = await uploadImage(values.image_file, 'profiles', 200, 200);
+    if (step === 1) {
+      const isValid = await form.trigger(['type', 'title', 'image_url', 'image_file'], { shouldFocus: true });
+      if (isValid) {
+        setStep(2);
+      }
+      return;
     }
 
-    // Handle screenshot upload
-    let screenshotUrl = values.fact_screenshot_url;
-    if (values.fact_screenshot_file) {
-      screenshotUrl = await uploadImage(values.fact_screenshot_file, 'screenshots', 1600, 1600);
-    }
-
-    const { title, type, page_slug, ...rest } = values;
-    await addEntry({
-      title,
-      page_slug,
-      type,
-      image_url: imageUrl || "",
-      fact_screenshot_url: screenshotUrl || "",
-      fact_link: values.fact_link || undefined,
-      description: "",
-    });
+    setIsSubmitting(true);
+    const uploadedFiles: { path: string; bucket: 'profiles' | 'screenshots' }[] = [];
     
-    toast({
-      title: "Success",
-      description: "Entry submitted for review.",
-    });
-    form.reset();
-    setStep(1);
-    onOpenChange(false);
-  } catch (error) {
-    console.error(error);
-    toast({
-      title: "Error",
-      description: "Failed to submit entry. Please try again.",
-      variant: "destructive",
-    });
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+    try {
+      // Handle profile image
+      let imageUrl: string;
+      let profileResult;
+      
+      if (values.image_file) {
+        profileResult = await processAndUploadImage(
+          values.image_file, 
+          'profiles', 
+          400, 
+          400, 
+          values.page_slug
+        );
+      } else if (values.image_url) {
+        profileResult = await processAndUploadImage(
+          values.image_url, 
+          'profiles', 
+          400, 
+          400, 
+          values.page_slug
+        );
+      } else {
+        throw new Error('No image provided');
+      }
+      
+      imageUrl = profileResult.publicUrl;
+      uploadedFiles.push({ path: profileResult.path, bucket: 'profiles' });
+
+      // Handle screenshot
+      let screenshotUrl: string | undefined;
+      if (values.fact_screenshot_file || values.fact_screenshot_url) {
+        const screenshotResult = await processAndUploadImage(
+          values.fact_screenshot_file || values.fact_screenshot_url!,
+          'screenshots',
+          1600,
+          1600,
+          values.page_slug
+        );
+        screenshotUrl = screenshotResult.publicUrl;
+        uploadedFiles.push({ path: screenshotResult.path, bucket: 'screenshots' });
+      }
+
+      // Only proceed with entry creation if all uploads succeeded
+      const { title, type, page_slug, ...rest } = values;
+      await addEntry({
+        title,
+        page_slug,
+        type,
+        image_url: imageUrl,
+        fact_screenshot_url: screenshotUrl || "",
+        fact_url: values.fact_url || undefined,
+        description: "",
+      });
+      
+      toast({
+        title: "Success",
+        description: "Entry submitted for review.",
+      });
+      form.reset();
+      setStep(1);
+      onOpenChange(false);
+    } catch (error) {
+      console.error(error);
+      
+      // Clean up any uploaded files if there was an error
+      for (const file of uploadedFiles) {
+        await deleteUploadedFile(file.path, file.bucket);
+      }
+      
+      toast({
+        title: "Error",
+        description: "Failed to submit entry. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Add useEffect for window close
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (isSubmitting) {
+        e.preventDefault();
+        //@ts-ignore - returnValue is deprecated but needed for browser compatibility
+        e.returnValue = '';
+        return '';
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [isSubmitting]);
 
   return (
-    <Dialog open={open} onOpenChange={(open) => {
-      if (!open) {
-        form.reset();
-        setStep(1);
-      }
-      onOpenChange(open);
-    }}>
+    <Dialog 
+      open={open} 
+      onOpenChange={(open) => {
+        if (!open && isSubmitting) {
+          if (window.confirm('Are you sure you want to close? Your submission is in progress.')) {
+            onOpenChange(open);
+          }
+          return;
+        }
+        onOpenChange(open);
+      }}
+    >
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>

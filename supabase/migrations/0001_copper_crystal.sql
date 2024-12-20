@@ -6,11 +6,11 @@ CREATE TABLE entries (
   description text,
   image_url text,
   fact_screenshot_url text,
-  fact_link text,
+  fact_url text,
   type text NOT NULL CHECK (type IN ('company', 'person')),
   status text NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'rejected')),
   CONSTRAINT require_evidence CHECK (
-    (fact_screenshot_url IS NOT NULL) OR (fact_link IS NOT NULL)
+    (fact_screenshot_url IS NOT NULL) OR (fact_url IS NOT NULL)
   )
 );
 

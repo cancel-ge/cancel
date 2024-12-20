@@ -29,10 +29,10 @@ export function StepTwo({ form }: { form: any }) {
 
       <FormField
         control={form.control}
-        name="fact_link"
+        name="fact_url"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Fact Link (Optional)</FormLabel>
+            <FormLabel>Fact URL (Optional)</FormLabel>
             <FormControl>
               <Input placeholder="Enter URL of fact source" {...field} />
             </FormControl>

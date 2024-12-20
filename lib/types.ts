@@ -5,7 +5,7 @@ export interface Entry {
   description?: string;
   image_url: string;
   fact_screenshot_url?: string;
-  fact_link?: string;
+  fact_url?: string;
   type: 'company' | 'person';
   created_at: string;
   status: 'pending' | 'approved' | 'rejected';

@@ -8,7 +8,7 @@ export const entryFormSchema = z.object({
   image_file: z.any().optional(),
   fact_screenshot_url: z.string().optional(),
   fact_screenshot_file: z.any().optional(),
-  fact_link: z.string().url("Must be a valid URL").optional().or(z.string().length(0)),
+  fact_url: z.string().url("Must be a valid URL").optional().or(z.string().length(0)),
 }).superRefine((data, ctx) => {
   // Check if either image_url or image_file is present
   if (!data.image_url && !data.image_file) {
