@@ -41,32 +41,13 @@ export function SearchBar({
   return (
     <div className="flex flex-col gap-4 mb-6">
       <Input
-        placeholder="Search by title..."
+        placeholder="Search by name..."
         value={search}
         onChange={(e) => onSearchChange(e.target.value)}
         className="w-full"
       />
       <div className="flex flex-row justify-between gap-2 overflow-x-auto pb-2 -mb-2">
         <div className="flex flex-row gap-2 items-center">
-          <Button
-            variant="default"
-            onClick={onAddClick}
-            className="flex-shrink-0"
-          >
-            <Plus className="mr-2 h-4 w-4" />
-            Cancel
-          </Button>
-          
-          <div className="flex items-center text-sm text-muted-foreground">
-            <span>{companiesCount} Companies</span>
-            <span className="mx-2 text-muted-foreground/30">|</span>
-            <span>{peopleCount} People</span>
-            <span className="mx-2 text-muted-foreground/30">|</span>
-            <span>{pendingCount} Pending</span>
-          </div>
-        </div>
-
-        <div className="flex flex-row gap-2">
           <Select value={type} onValueChange={onTypeChange}>
             <SelectTrigger className="w-[110px] flex-shrink-0">
               <SelectValue placeholder="Filter" />
@@ -93,6 +74,25 @@ export function SearchBar({
             <Shuffle className="mr-2 h-4 w-4" />
             Shuffle
           </Button>
+        </div>
+
+        <div className="flex flex-row gap-2">
+          <div className="flex items-center text-sm text-muted-foreground">
+            <span>{companiesCount} Companies</span>
+            <span className="mx-2 text-muted-foreground/30">|</span>
+            <span>{peopleCount} People</span>
+            <span className="mx-2 text-muted-foreground/30">|</span>
+            <span>{pendingCount} Pending</span>
+          </div>
+          <Button
+            variant="default"
+            onClick={onAddClick}
+            className="flex-shrink-0"
+          >
+            <Plus className="mr-2 h-4 w-4" />
+            Add
+          </Button>
+
         </div>
       </div>
     </div>
