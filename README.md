@@ -67,3 +67,13 @@ Follow these steps to get the project up and running:
     ```bash
     yarn dev
     ```
+
+---
+
+## 🎊️ Contributing
+
+We welcome contributions to improve the project! Whether you're fixing bugs, adding new features, or improving documentation, your contributions are more than welcomed.
+
+Please refer to our [Contributing Guidelines](./CONTRIBUTING.md) for detailed instructions on how to get started.
+
+By contributing, you agree to follow the [Code of Conduct](./CODE_OF_CONDUCT.md) and adhere to the guidelines outlined in the contributing document.
