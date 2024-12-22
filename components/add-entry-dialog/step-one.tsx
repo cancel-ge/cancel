@@ -126,13 +126,19 @@ export function StepOne({ form, onSlugExistsChange }: {
                   form.setValue("image_url", value);
                   if (value) {
                     form.setValue("image_file", null);
+                    form.clearErrors("image_url");
                   }
                 }}
                 onFileChange={(file) => {
                   form.setValue("image_file", file);
                   if (file) {
                     form.setValue("image_url", "");
+                    form.clearErrors("image_url");
                   }
+                }}
+                onRemoveFile={() => {
+                  form.setValue("image_file", null);
+                  form.clearErrors("image_url");
                 }}
                 placeholder="Enter profile image URL or upload"
               />

@@ -13,6 +13,7 @@ interface ImageInputProps {
   onUrlChange: (value: string) => void;
   onFileChange: (file: File | null) => void;
   placeholder?: string;
+  onRemoveFile: () => void;
 }
 
 export function ImageInput({
@@ -20,7 +21,8 @@ export function ImageInput({
   fileValue,
   onUrlChange,
   onFileChange,
-  placeholder
+  placeholder,
+  onRemoveFile
 }: ImageInputProps) {
   const [preview, setPreview] = useState<string>("");
 
@@ -40,6 +42,7 @@ export function ImageInput({
     onUrlChange("");
     onFileChange(null);
     setPreview("");
+    onRemoveFile();
   };
 
   return (
@@ -52,11 +55,12 @@ export function ImageInput({
           onChange={(e) => onUrlChange(e.target.value)}
         />
         <div className="flex flex-col items-center gap-1">
-          <Separator orientation="vertical" className="h-8" />
+          <Separator orientation="vertical" className="h-2" />
           <span className="text-xs text-muted-foreground font-medium">OR</span>
-          <Separator orientation="vertical" className="h-8" />
+          <Separator orientation="vertical" className="h-2" />
         </div>
         <Input
+          className="cursor-pointer"
           type="file"
           accept="image/*"
           onChange={(e) => {
@@ -76,6 +80,7 @@ export function ImageInput({
             className="object-cover rounded-lg"
           />
           <Button
+            title="Remove image"
             type="button"
             variant="destructive"
             size="icon"
