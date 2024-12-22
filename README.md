@@ -1,6 +1,6 @@
 # Cancel.ge
 
-A platform for documenting and exposing companies and public figures not actively supporting Georgian EU membership aspirations.
+A platform for documenting and exposing companies, public figures, and entities affiliated with the current ex-facto government of Georgia or those failing to take actions to distance themselves from it, particularly in regard to their stance on Georgian EU membership aspirations.
 
 ## Tech Stack
 

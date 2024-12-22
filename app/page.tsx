@@ -21,11 +21,11 @@ export default function Home() {
               <div className="space-y-2">
                 <p className="text-red-500 font-semibold tracking-wide uppercase text-sm">Take Action Now</p>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                  Stand Against Injustice
+                  Stand Against Injustice 🇬🇪🇪🇺
                 </h1>
               </div>
               <p className="text-lg md:text-xl leading-relaxed text-gray-300 max-w-2xl mx-auto lg:mx-0">
-                The Georgian government has refused to join the EU, and we are here to protest against the companies and individuals who do not support the aspirations of the Georgian people.
+                Georgia’s de facto government has turned its back on the people’s dream of joining the EU. We’re here to shine a light on companies, public figures, and institutions that are either supporting this regime or staying silent when it matters most. Let’s stand together for a democratic, European future for Georgia!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
                 <a href="https://daitove.ge/" target="_blank" rel="noopener noreferrer">
