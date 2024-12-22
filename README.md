@@ -2,6 +2,20 @@
 
 A platform for documenting and exposing companies, public figures, and entities affiliated with the current **de facto government** of Georgia, or those failing to take actions to distance themselves from it, particularly in regard to their stance on Georgian EU membership aspirations.
 
+---
+
+## ☕ Support the Project
+
+If you like this project and want to support its development, feel free to buy me a coffee! Your support helps us maintain and improve this open-source project.
+
+All funds raised through [Buy Me a Coffee](https://buymeacoffee.com/dsha256) will be used exclusively for the maintenance of this open-source project. We are committed to transparency, and any contributions made will directly support the ongoing development, bug fixes, new features, and general upkeep of the project.
+
+We will provide transparency into how funds are being used to ensure that your contributions are supporting the continued success of the project.
+
+[![Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20Me%20A%20Coffee&emoji=&slug=dsha256&button_colour=FF813F&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00)](https://buymeacoffee.com/dsha256)
+
+----
+
 ## 🌐 Tech Stack
 
 - **Next.js 15**
@@ -10,12 +24,16 @@ A platform for documenting and exposing companies, public figures, and entities 
 - **shadcn/ui** (UI components)
 - **Supabase** (Database & Auth)
 
+---
+
 ## 🔧 Prerequisites
 
 Before you begin, make sure you have the following:
 
 - **Node.js** v18+ (or newer)
 - **Supabase** account (for database and authentication)
+
+---
 
 ## 🛠 Installation
 
