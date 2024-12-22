@@ -50,6 +50,29 @@ export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
   const onSubmit = async (values: z.infer<typeof entryFormSchema>) => {
     if (step === 1) {
       const isValid = await form.trigger(['type', 'title', 'image_url', 'image_file'], { shouldFocus: true });
+      
+      // Check if the entry exists before proceeding
+      try {
+        const response = await fetch(`/api/check-slug?slug=${values.page_slug}`);
+        const { exists } = await response.json();
+        
+        if (exists) {
+          form.setError("title", {
+            type: "manual",
+            message: "This entry already exists"
+          });
+          return;
+        }
+      } catch (error) {
+        console.error('Error checking slug:', error);
+        toast({
+          title: "Error",
+          description: "Failed to verify entry uniqueness. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
       if (isValid) {
         setStep(2);
       }
