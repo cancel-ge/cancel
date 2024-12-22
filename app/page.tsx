@@ -28,10 +28,13 @@ export default function Home() {
                 The Georgian government has refused to join the EU, and we are here to protest against the companies and individuals who do not support the aspirations of the Georgian people.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
-                <Button size="lg" variant="destructive" className="w-full sm:w-auto">
-                  Join the Movement
-                </Button>
-                <a href="https://ge.usembassy.gov/statement-on-georgias-suspension-of-european-union-accession/" target="_blank" rel="noopener noreferrer">
+                <a href="https://daitove.ge/" target="_blank" rel="noopener noreferrer">
+                  <Button size="lg" variant="destructive" className="w-full sm:w-auto">
+                    Join the Movement
+                  </Button>
+                </a>
+                <a href="https://ge.usembassy.gov/statement-on-georgias-suspension-of-european-union-accession/"
+                   target="_blank" rel="noopener noreferrer">
                   <Button size="lg" variant="outline" className="w-full sm:w-auto bg-transparent text-white border-white/20 hover:bg-white/10 hover:text-white">
                     Learn More
                   </Button>
