@@ -15,6 +15,9 @@ interface EntriesContextType {
     sortOrder?: 'desc' | 'asc';
     shuffle?: boolean;
   }) => Promise<void>;
+  companiesCount: number;
+  peopleCount: number;
+  pendingCount: number;
 }
 
 const EntriesContext = createContext<EntriesContextType | undefined>(undefined);
@@ -28,10 +31,10 @@ export function useEntries() {
 }
 
 export function EntriesProvider({ children }: { children: ReactNode }) {
-  const { entries, loading, error, addEntry, refreshEntries } = useSupabaseEntries();
+  const { entries, loading, error, addEntry, refreshEntries, companiesCount, peopleCount, pendingCount } = useSupabaseEntries();
 
   return (
-    <EntriesContext.Provider value={{ entries, loading, error, addEntry, refreshEntries }}>
+    <EntriesContext.Provider value={{ entries, loading, error, addEntry, refreshEntries, companiesCount, peopleCount, pendingCount }}>
       {children}
     </EntriesContext.Provider>
   );

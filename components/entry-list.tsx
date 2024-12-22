@@ -21,7 +21,14 @@ function EntryCardSkeleton() {
 
 export function EntryList() {
   const [showAddDialog, setShowAddDialog] = useState(false);
-  const { entries, loading, error } = useEntries();
+  const { 
+    entries, 
+    loading, 
+    error,
+    companiesCount,
+    peopleCount,
+    pendingCount 
+  } = useEntries();
   
   const {
     search,
@@ -81,12 +88,20 @@ export function EntryList() {
         onSortOrderChange={setSortOrder}
         onShuffle={onShuffle}
         onAddClick={() => setShowAddDialog(true)}
+        companiesCount={companiesCount}
+        peopleCount={peopleCount}
+        pendingCount={pendingCount}
       />
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {displayedEntries.map((entry) => (
           <Link key={entry.id} href={`/${entry.page_slug}`}>
-            <Card className="cursor-pointer hover:shadow-lg transition-shadow h-full flex flex-col items-center justify-center p-6">
+            <Card className="cursor-pointer hover:shadow-lg transition-shadow h-full flex flex-col items-center justify-center p-6 relative">
+              <div className="absolute inset-0 flex items-start justify-center pt-6 pointer-events-none">
+                <div className="w-40 h-40 mb-4 rounded-full border-8 border-red-500/30 relative">
+                  <div className="absolute top-1/2 left-1/2 w-[141%] h-[8px] bg-red-500/30 -translate-x-1/2 -translate-y-1/2 rotate-45" />
+                </div>
+              </div>
               {entry.image_url && (
                 <div className="w-40 h-40 mb-4">
                   <img

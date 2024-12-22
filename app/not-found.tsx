@@ -7,7 +7,7 @@ export default function NotFound() {
       <div className="text-center">
         <h2 className="text-2xl font-bold mb-4">Entry Not Found</h2>
         <p className="text-muted-foreground mb-6">
-          The entry you're looking for doesn't exist or has been removed.
+          The entry you&apos;re looking for doesn&apos;t exist or has been removed.
         </p>
         <Button asChild>
           <Link href="/">Return Home</Link>

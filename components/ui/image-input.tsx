@@ -1,16 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "./input";
 import { Button } from "./button";
 import { Upload, X } from "lucide-react";
+import Image from "next/image";
+import { Separator } from "@/components/ui/separator"
 
 interface ImageInputProps {
   urlValue: string;
-  fileValue?: File;
+  fileValue: File | null;
   onUrlChange: (value: string) => void;
-  onFileChange: (file: File | undefined) => void;
+  onFileChange: (file: File | null) => void;
   placeholder?: string;
+  onRemoveFile: () => void;
 }
 
 export function ImageInput({
@@ -18,76 +21,71 @@ export function ImageInput({
   fileValue,
   onUrlChange,
   onFileChange,
-  placeholder
+  placeholder,
+  onRemoveFile
 }: ImageInputProps) {
-  const [preview, setPreview] = useState<string>();
+  const [preview, setPreview] = useState<string>("");
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const previewUrl = URL.createObjectURL(file);
-      setPreview(previewUrl);
-      onFileChange(file);
-      onUrlChange(""); // Clear URL when file is uploaded
+  useEffect(() => {
+    if (fileValue) {
+      const objectUrl = URL.createObjectURL(fileValue);
+      setPreview(objectUrl);
+      return () => URL.revokeObjectURL(objectUrl);
+    } else if (urlValue) {
+      setPreview(urlValue);
+    } else {
+      setPreview("");
     }
-  };
+  }, [fileValue, urlValue]);
 
-  const handleRemoveFile = () => {
-    setPreview(undefined);
-    onFileChange(undefined);
-    if (preview) {
-      URL.revokeObjectURL(preview);
-    }
+  const handleRemoveImage = () => {
+    onUrlChange("");
+    onFileChange(null);
+    setPreview("");
+    onRemoveFile();
   };
 
   return (
     <div className="space-y-2">
-      <div className="flex gap-2">
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4">
         <Input
           type="text"
           placeholder={placeholder}
           value={urlValue}
+          onChange={(e) => onUrlChange(e.target.value)}
+        />
+        <div className="flex flex-col items-center gap-1">
+          <Separator orientation="vertical" className="h-2" />
+          <span className="text-xs text-muted-foreground font-medium">OR</span>
+          <Separator orientation="vertical" className="h-2" />
+        </div>
+        <Input
+          className="cursor-pointer"
+          type="file"
+          accept="image/*"
           onChange={(e) => {
-            onUrlChange(e.target.value);
-            if (fileValue) {
-              handleRemoveFile();
+            const file = e.target.files?.[0];
+            if (file) {
+              onFileChange(file);
             }
           }}
-          disabled={!!fileValue}
         />
-        <div className="relative">
-          <Button
-            type="button"
-            variant="outline"
-            className="relative"
-            onClick={() => document.getElementById("file-upload")?.click()}
-          >
-            <Upload className="h-4 w-4 mr-2" />
-            Upload
-          </Button>
-          <input
-            id="file-upload"
-            type="file"
-            className="hidden"
-            accept="image/*"
-            onChange={handleFileChange}
-          />
-        </div>
       </div>
-
-      {(preview || fileValue) && (
-        <div className="relative inline-block">
-          <img
+      {preview && (
+        <div className="relative w-32 h-32 group">
+          <Image
             src={preview}
             alt="Preview"
-            className="h-16 w-16 object-cover rounded"
+            fill
+            className="object-cover rounded-lg"
           />
           <Button
+            title="Remove image"
             type="button"
-            variant="outline"
+            variant="destructive"
             size="icon"
             className="absolute -top-2 -right-2 h-6 w-6 rounded-full"
-            onClick={handleRemoveFile}
+            onClick={handleRemoveImage}
           >
             <X className="h-4 w-4" />
           </Button>

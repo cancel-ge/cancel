@@ -9,18 +9,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 
-interface Entry {
-  id: string;
-  title: string;
-  description: string;
-  image_url: string;
-  fact_screenshot_url: string;
-  fact_url: string;
-  type: 'company' | 'person';
-}
-
 interface EntryDialogProps {
-  entry: Entry | null;
+  entry: {
+    description?: string;
+    id: string;
+    title: string;
+    image_url: string;
+    fact_screenshot_url?: string;
+    fact_url?: string;
+    type: 'company' | 'person';
+  };
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
@@ -32,14 +30,23 @@ export function EntryDialog({ entry, open, onOpenChange }: EntryDialogProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="flex items-center space-x-4">
-            {entry.image_url && (
-              <img
-                src={entry.image_url}
-                alt={entry.title}
-                className="w-16 h-16 rounded-full object-cover"
-              />
-            )}
+          <DialogTitle className="flex items-center space-x-4 relative">
+            <div className="relative">
+              {entry.image_url && (
+                <>
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="w-16 h-16 rounded-full border-8 border-red-500/30 relative">
+                      <div className="absolute top-1/2 left-1/2 w-[141%] h-[8px] bg-red-500/40 -translate-x-1/2 -translate-y-1/2 rotate-45" />
+                    </div>
+                  </div>
+                  <img
+                    src={entry.image_url}
+                    alt={entry.title}
+                    className="w-16 h-16 rounded-full object-cover"
+                  />
+                </>
+              )}
+            </div>
             <span>{entry.title}</span>
           </DialogTitle>
         </DialogHeader>

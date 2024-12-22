@@ -11,8 +11,42 @@ interface FetchParams {
 
 export function useSupabaseEntries() {
   const [entries, setEntries] = useState<Entry[]>([]);
+  const [counts, setCounts] = useState({
+    companiesCount: 0,
+    peopleCount: 0,
+    pendingCount: 0
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+
+  const fetchCounts = useCallback(async () => {
+    try {
+      const [companiesCount, peopleCount, pendingCount] = await Promise.all([
+        supabase
+          .from("entries")
+          .select("*", { count: 'exact', head: true })
+          .eq("status", "approved")
+          .eq("type", "company"),
+        supabase
+          .from("entries")
+          .select("*", { count: 'exact', head: true })
+          .eq("status", "approved")
+          .eq("type", "person"),
+        supabase
+          .from("entries")
+          .select("*", { count: 'exact', head: true })
+          .eq("status", "pending")
+      ]);
+
+      setCounts({
+        companiesCount: companiesCount.count || 0,
+        peopleCount: peopleCount.count || 0,
+        pendingCount: pendingCount.count || 0
+      });
+    } catch (err) {
+      console.error("Error fetching counts:", err);
+    }
+  }, []);
 
   const fetchEntries = useCallback(async (params?: FetchParams) => {
     try {
@@ -61,7 +95,8 @@ export function useSupabaseEntries() {
 
   useEffect(() => {
     fetchEntries();
-  }, [fetchEntries]);
+    fetchCounts();
+  }, [fetchEntries, fetchCounts]);
 
   async function addEntry(
     newEntry: Omit<Entry, "id" | "created_at" | "status">
@@ -86,5 +121,6 @@ export function useSupabaseEntries() {
     error,
     addEntry,
     refreshEntries: fetchEntries,
+    ...counts
   };
 }

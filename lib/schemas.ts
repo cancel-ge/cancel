@@ -1,8 +1,8 @@
 import * as z from "zod";
 
 export const entryFormSchema = z.object({
-  title: z.string().min(2, "Name must be at least 2 characters"),
-  page_slug: z.string().min(1, "Page slug is required"),
+  title: z.string().min(3, "Name must be at least 3 characters"),
+  page_slug: z.string().min(3, "Page slug is required"),
   type: z.enum(["company", "person"]),
   image_url: z.string().optional(),
   image_file: z.any().optional(),
@@ -14,7 +14,7 @@ export const entryFormSchema = z.object({
   if (!data.image_url && !data.image_file) {
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
-      message: "Profile image is required",
+      message: "Image is required",
       path: ["image_url"]
     });
   }
