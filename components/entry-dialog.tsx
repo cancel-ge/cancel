@@ -36,7 +36,7 @@ export function EntryDialog({ entry, open, onOpenChange }: EntryDialogProps) {
                 <>
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     <div className="w-16 h-16 rounded-full border-8 border-red-500/30 relative">
-                      <div className="absolute top-1/2 left-1/2 w-[141%] h-[8px] bg-red-500/30 -translate-x-1/2 -translate-y-1/2 rotate-45" />
+                      <div className="absolute top-1/2 left-1/2 w-[141%] h-[8px] bg-red-500/40 -translate-x-1/2 -translate-y-1/2 rotate-45" />
                     </div>
                   </div>
                   <img

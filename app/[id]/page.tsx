@@ -77,8 +77,8 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
                 {entry.image_url && (
                   <div className="relative">
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      <div className="w-16 h-16 rounded-full border-8 border-red-500/30 relative">
-                        <div className="absolute top-1/2 left-1/2 w-[141%] h-[8px] bg-red-500/30 -translate-x-1/2 -translate-y-1/2 rotate-45" />
+                      <div className="w-16 h-16 rounded-full border-4 border-red-500/60 relative">
+                        <div className="absolute top-1/2 left-1/2 w-[100%] h-[4px] bg-red-500/45 -translate-x-1/2 -translate-y-1/2 rotate-45" />
                       </div>
                     </div>
                     <img
