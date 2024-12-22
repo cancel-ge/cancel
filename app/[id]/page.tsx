@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { SocialLinkButton } from '@/components/social-link-button';
 import { useEntries } from '@/lib/entries-context';
 import { useEffect } from 'react';
+import { Header } from '@/components/header';
 
 export default function EntryPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -23,6 +24,7 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
   if (loading) {
     return (
       <main className="min-h-screen bg-background">
+        <Header />
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto">
             <div className="animate-pulse">
@@ -49,6 +51,7 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
   if (error) {
     return (
       <main className="min-h-screen bg-background">
+        <Header />
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl font-bold mb-4">Error Loading Entry</h2>
@@ -65,12 +68,13 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
 
   return (
     <main className="min-h-screen bg-background">
+      <Header />
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">
           <Link href="/" className="text-muted-foreground hover:text-foreground mb-6 inline-block">
             ← Back to list
           </Link>
-          
+
           <Card className="mt-4">
             <CardHeader>
               <div className="flex items-center space-x-4">
@@ -88,7 +92,7 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
                     />
                   </div>
                 )}
-                <CardTitle className="text-2xl">{entry.title}</CardTitle>
+                <CardTitle className="text-2xl"><h1>{entry.title}</h1></CardTitle>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
