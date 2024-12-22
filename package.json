@@ -42,6 +42,7 @@
     "@radix-ui/react-toggle-group": "^1.1.1",
     "@radix-ui/react-tooltip": "^1.1.6",
     "@supabase/supabase-js": "^2.47.10",
+    "@tanstack/react-query": "^5.62.8",
     "@types/lodash": "^4.17.13",
     "@types/node": "22.10.2",
     "@types/react": "19.0.2",
@@ -78,6 +79,7 @@
   },
   "devDependencies": {
     "@shadcn/ui": "^0.0.4",
+    "@types/react-query": "^1.2.9",
     "shadcn-ui": "^0.9.4",
     "supabase": "^2.1.1"
   }

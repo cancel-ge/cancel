@@ -20,6 +20,7 @@ export function StepTwo({ form }: { form: any }) {
                 onUrlChange={(value) => form.setValue("fact_screenshot_url", value)}
                 onFileChange={(file) => form.setValue("fact_screenshot_file", file)}
                 placeholder="Enter screenshot URL or upload"
+                onRemoveFile={() => form.setValue("fact_screenshot_file", null)}
               />
             </FormControl>
             <FormMessage />
