@@ -9,7 +9,8 @@ export const mockEntries: Entry[] = [
     type: 'company',
     created_at: '2024-03-20T12:00:00Z',
     fact_url: 'https://example.com',
-    status: 'approved'
+    status: 'approved',
+    page_slug: "mock"
   },
   {
     id: 'john-smith',
@@ -19,6 +20,7 @@ export const mockEntries: Entry[] = [
     type: 'person',
     created_at: '2024-03-19T12:00:00Z',
     fact_url: 'https://example.com',
-    status: 'approved'
+    status: 'approved',
+    page_slug: "mock"
   }
 ];
