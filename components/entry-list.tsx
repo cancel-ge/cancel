@@ -21,7 +21,14 @@ function EntryCardSkeleton() {
 
 export function EntryList() {
   const [showAddDialog, setShowAddDialog] = useState(false);
-  const { entries, loading, error } = useEntries();
+  const { 
+    entries, 
+    loading, 
+    error,
+    companiesCount,
+    peopleCount,
+    pendingCount 
+  } = useEntries();
   
   const {
     search,
@@ -81,6 +88,9 @@ export function EntryList() {
         onSortOrderChange={setSortOrder}
         onShuffle={onShuffle}
         onAddClick={() => setShowAddDialog(true)}
+        companiesCount={companiesCount}
+        peopleCount={peopleCount}
+        pendingCount={pendingCount}
       />
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
