@@ -29,6 +29,7 @@ interface AddEntryDialogProps {
 export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [slugExists, setSlugExists] = useState(false);
   const { toast } = useToast();
   const { addEntry } = useEntries();
   
@@ -50,30 +51,7 @@ export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
   const onSubmit = async (values: z.infer<typeof entryFormSchema>) => {
     if (step === 1) {
       const isValid = await form.trigger(['type', 'title', 'image_url', 'image_file'], { shouldFocus: true });
-      
-      // Check if the entry exists before proceeding
-      try {
-        const response = await fetch(`/api/check-slug?slug=${values.page_slug}`);
-        const { exists } = await response.json();
-        
-        if (exists) {
-          form.setError("title", {
-            type: "manual",
-            message: "This entry already exists"
-          });
-          return;
-        }
-      } catch (error) {
-        console.error('Error checking slug:', error);
-        toast({
-          title: "Error",
-          description: "Failed to verify entry uniqueness. Please try again.",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      if (isValid) {
+      if (isValid && !slugExists) {
         setStep(2);
       }
       return;
@@ -201,7 +179,14 @@ export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            {step === 1 ? <StepOne form={form} /> : <StepTwo form={form} />}
+            {step === 1 ? (
+              <StepOne 
+                form={form} 
+                onSlugExistsChange={setSlugExists} 
+              />
+            ) : (
+              <StepTwo form={form} />
+            )}
             
             <DialogFooter className="flex justify-between">
               {step === 2 && (
@@ -213,7 +198,10 @@ export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
                   Back
                 </Button>
               )}
-              <Button type="submit" disabled={isSubmitting}>
+              <Button 
+                type="submit" 
+                disabled={isSubmitting || (step === 1 && slugExists)}
+              >
                 {step === 1 ? "Next" : isSubmitting ? "Submitting..." : "Submit"}
               </Button>
             </DialogFooter>

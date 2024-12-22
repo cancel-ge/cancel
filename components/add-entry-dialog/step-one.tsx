@@ -9,7 +9,10 @@ import { generateSlug } from "@/lib/utils";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
-export function StepOne({ form }: { form: any }) {
+export function StepOne({ form, onSlugExistsChange }: { 
+  form: any; 
+  onSlugExistsChange: (exists: boolean) => void;
+}) {
   const [slugExists, setSlugExists] = useState(false);
 
   const checkSlugExists = async (slug: string) => {
@@ -17,6 +20,16 @@ export function StepOne({ form }: { form: any }) {
       const response = await fetch(`/api/check-slug?slug=${slug}`);
       const { exists } = await response.json();
       setSlugExists(exists);
+      onSlugExistsChange(exists);
+      
+      if (exists) {
+        form.setError("title", {
+          type: "manual",
+          message: "This entry already exists"
+        });
+      } else {
+        form.clearErrors("title");
+      }
     } catch (error) {
       console.error('Error checking slug:', error);
     }
@@ -95,7 +108,6 @@ export function StepOne({ form }: { form: any }) {
                 {slugExists && <span className="ml-1">- This entry already exists</span>}
               </p>
             )}
-            <FormMessage />
           </FormItem>
         )}
       />
