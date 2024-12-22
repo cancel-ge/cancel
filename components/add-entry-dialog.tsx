@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/lib/hooks/use-toast";
 import { useEntries } from "@/lib/entries-context";
 import { StepOne } from "./add-entry-dialog/step-one";
 import { StepTwo } from "./add-entry-dialog/step-two";

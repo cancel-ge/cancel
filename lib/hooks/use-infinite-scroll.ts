@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 export function useInfiniteScroll<T>(
   items: T[],
-  initialLimit: number = 6
+  initialLimit: number = 24
 ) {
   const [displayedItems, setDisplayedItems] = useState<T[]>([]);
   const [limit, setLimit] = useState(initialLimit);
