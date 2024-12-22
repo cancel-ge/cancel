@@ -14,7 +14,7 @@ export const entryFormSchema = z.object({
   if (!data.image_url && !data.image_file) {
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
-      message: "Profile image is required",
+      message: "Image is required",
       path: ["image_url"]
     });
   }
