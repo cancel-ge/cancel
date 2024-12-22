@@ -9,18 +9,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 
-interface Entry {
-  id: string;
-  title: string;
-  description: string;
-  image_url: string;
-  fact_screenshot_url: string;
-  fact_url: string;
-  type: 'company' | 'person';
-}
-
 interface EntryDialogProps {
-  entry: Entry | null;
+  entry: {
+    description?: string;
+    id: string;
+    title: string;
+    image_url: string;
+    fact_screenshot_url?: string;
+    fact_url?: string;
+    type: 'company' | 'person';
+  };
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
