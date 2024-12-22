@@ -77,13 +77,6 @@ export function SearchBar({
         </div>
 
         <div className="flex flex-row gap-2">
-          <div className="flex items-center text-sm text-muted-foreground">
-            <span>{companiesCount} Companies</span>
-            <span className="mx-2 text-muted-foreground/30">|</span>
-            <span>{peopleCount} People</span>
-            <span className="mx-2 text-muted-foreground/30">|</span>
-            <span>{pendingCount} Pending</span>
-          </div>
           <Button
             variant="default"
             onClick={onAddClick}
@@ -92,7 +85,13 @@ export function SearchBar({
             <Plus className="mr-2 h-4 w-4" />
             Add
           </Button>
-
+          <div className="flex items-center text-sm text-muted-foreground">
+            <span>{companiesCount} Companies</span>
+            <span className="mx-2 text-muted-foreground/30">|</span>
+            <span>{peopleCount} People</span>
+            <span className="mx-2 text-muted-foreground/30">|</span>
+            <span>{pendingCount} Pending</span>
+          </div>
         </div>
       </div>
     </div>
