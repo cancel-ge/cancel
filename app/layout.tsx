@@ -1,7 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Roboto_Mono } from 'next/font/google';
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { ThemeProvider } from '@/components/theme-provider';
 import { EntriesProvider } from '@/lib/entries-context';
 import { Toaster } from '@/components/ui/toaster';
@@ -52,7 +52,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {isProduction() && <GoogleTagManager gtmId="G-9GDBGB7NBW" />}
+      {isProduction() && <GoogleAnalytics gaId="G-9GDBGB7NBW" />}
       <body className={robotoMono.className} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
