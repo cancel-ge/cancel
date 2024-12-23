@@ -5,7 +5,7 @@ import { Paperclip } from 'lucide-react';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background bg-slate-50">
+    <main className="min-h-screen bg-background">
       <Header />
       <section className="relative py-24 md:py-32 overflow-hidden">
         {/* Background gradient with overlay */}

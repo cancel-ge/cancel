@@ -23,7 +23,7 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-background bg-slate-50">
+      <main className="min-h-screen bg-background">
         <Header />
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto">
@@ -50,7 +50,7 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
 
   if (error) {
     return (
-      <main className="min-h-screen bg-background bg-slate-50">
+      <main className="min-h-screen bg-background">
         <Header />
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto text-center">
@@ -67,7 +67,7 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
   }
 
   return (
-    <main className="min-h-screen bg-background bg-slate-50">
+    <main className="min-h-screen bg-background">
       <Header />
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">
