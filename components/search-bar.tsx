@@ -46,7 +46,7 @@ export function SearchBar({
         onChange={(e) => onSearchChange(e.target.value)}
         className="w-full"
       />
-      <div className="flex flex-row justify-between gap-2 overflow-x-auto pb-2 -mb-2">
+      <div className="flex flex-col md:flex-row justify-between gap-2 overflow-x-auto pb-2 -mb-2">
         <div className="flex flex-row gap-2 items-center">
           <Select value={type} onValueChange={onTypeChange}>
             <SelectTrigger className="w-[110px] flex-shrink-0">
