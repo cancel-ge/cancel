@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://cancel.ge/og-image.png',
+        url: 'https://cancel.ge/geo-eu-flags.jpg',
         width: 1300,
         height: 731,
         alt: "Cancel.ge - Supporting Georgia's EU Membership Aspirations",
@@ -52,7 +52,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <meta name="google-site-verification" content="CxtofIL_MbN9qAx7zFyiqwL29_wmkjlG49JeAjmcXo8" />
       {isProduction() && <GoogleTagManager gtmId="G-9GDBGB7NBW" />}
       <body className={robotoMono.className} suppressHydrationWarning>
         <ThemeProvider
