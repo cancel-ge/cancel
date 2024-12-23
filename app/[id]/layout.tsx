@@ -15,12 +15,14 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     const seoDescription = entry.description 
         ? `${entry.description.slice(0, 155)}${entry.description.length > 155 ? '...' : ''}`
         : `${entry.title} - Statement diverges from the Georgian public's demonstrated commitment to democratic values and European aspirations.`;
+    
+    const seoTitle = `${entry.title} - Cancel.ge`;
 
     return {
-        title: `🚫 ${entry.title}`,
+        title: seoTitle,
         description: seoDescription,
         openGraph: {
-            title: `🚫 ${entry.title}`,
+            title: seoTitle,
             description: seoDescription,
             images: [
                 {
@@ -33,7 +35,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
         },
         twitter: {
             card: 'summary_large_image',
-            title: `🚫 ${entry.title}`,
+            title: seoTitle,
             description: seoDescription,
             images: [entry.fact_screenshot_url || entry.image_url || ''],
         },
