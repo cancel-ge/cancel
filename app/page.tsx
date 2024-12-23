@@ -34,8 +34,8 @@ export default function Home() {
               </div>
               <p className="text-lg md:text-xl leading-relaxed text-gray-300 max-w-2xl mx-auto lg:mx-0">
                 Georgia’s <a href="https://www.csce.gov/press-releases/chairman-wilson-and-ranking-member-cohen-express-their-solidarity-with-the-georgian-people" target="_blank" className="text-red-500">de facto government</a> has
-                turned its back on the people’s dream of joining the EU. We’re here to shine a light on companies, public figures, and institutions that are either supporting this regime or staying silent when it matters most.
-                Let’s stand together for a democratic, European future for Georgia!
+                turned its back on the people’s dream of joining the EU. We’re here to highlight companies, public figures, and institutions that are either aligned with this regime or failing to take a clear stance on this critical issue.
+                Let’s stand united for a democratic and European future for Georgia!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
                 <a href="https://daitove.ge/" target="_blank" rel="noopener noreferrer">
