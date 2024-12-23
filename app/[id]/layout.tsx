@@ -7,7 +7,7 @@ export async function generateMetadata({
     params: Promise<any> | undefined
 }): Promise<Metadata> {
     const resolvedParams = await Promise.resolve(params);
-    
+
     // Ensure params.id exists
     if (!resolvedParams?.id) {
         return {
@@ -26,10 +26,10 @@ export async function generateMetadata({
     }
 
     // Create an SEO-optimized description (truncated to ~155 characters)
-    const seoDescription = entry.description 
+    const seoDescription = entry.description
         ? `${entry.description.slice(0, 155)}${entry.description.length > 155 ? '...' : ''}`
         : `${entry.title} - Statement diverges from the Georgian public's demonstrated commitment to democratic values and European aspirations.`;
-    
+
     const seoTitle = `${entry.title} - Cancel.ge`;
 
     return {
