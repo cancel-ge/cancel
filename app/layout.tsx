@@ -52,7 +52,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {isProduction() || 1 && <GoogleAnalytics gaId="G-9GDBGB7NBW" />}
+      {isProduction() && <GoogleAnalytics gaId="G-9GDBGB7NBW" />}
       <body className={robotoMono.className} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
