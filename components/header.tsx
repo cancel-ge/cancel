@@ -14,8 +14,6 @@ export function Header() {
             <span className="text-3xl" role="img" aria-label="Cancel logo">🚫</span>
             <h1 className="text-2xl font-bold">Cancel.ge</h1>
           </Link>
-
-
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-4">
 

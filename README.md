@@ -2,6 +2,8 @@
 
 A platform for documenting and exposing companies, public figures, and entities affiliated with the current [de facto government](https://www.csce.gov/press-releases/chairman-wilson-and-ranking-member-cohen-express-their-solidarity-with-the-georgian-people/) of Georgia, or those failing to take actions to distance themselves from it, particularly in regard to their stance on Georgian EU membership aspirations.
 
+_Cancel culture allows marginalized people to seek accountability where the justice system fails._
+
 ---
 
 ## ☕ Support the Project
