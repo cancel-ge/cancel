@@ -56,3 +56,8 @@ export function generateSlug(text: string): string {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 }
+
+
+export function isProduction() {
+  return process.env.NODE_ENV === 'production';
+}
