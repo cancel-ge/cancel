@@ -38,7 +38,7 @@ export default function Home() {
                 Let’s stand united for a democratic and European future for Georgia!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
-                <a href="https://daitove.ge/" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.lightmvmnt.org" target="_blank" rel="noopener noreferrer">
                   <Button size="lg" variant="destructive" className="w-full sm:w-auto">
                     Join the Movement
                   </Button>
