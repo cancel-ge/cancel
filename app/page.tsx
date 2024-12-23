@@ -21,7 +21,7 @@ export default function Home() {
               <div className="space-y-2">
                 <p className="text-red-500 font-semibold tracking-wide uppercase text-sm">Stand Against Injustice</p>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                  I'm Georgian 🇬🇪 therefore<br />I'm European 🇪🇺
+                  I&apos;m Georgian 🇬🇪 therefore<br />I&apos;m European 🇪🇺
                 </h1>
                 <p className="text-sm text-gray-300">
                   <a href="https://www.researchgate.net/publication/264310531_'I_am_Georgian_and_therefore_I_am_European'_Re-searching_the_Europeanness_of_Georgia" target="_blank">

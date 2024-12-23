@@ -1,7 +1,19 @@
 import { Metadata } from 'next';
 import { getEntry } from '@/lib/get-entry';
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+export async function generateMetadata({
+    params,
+}: {
+    params: { id: string }
+}): Promise<Metadata> {
+    // Ensure params.id exists
+    if (!params?.id) {
+        return {
+            title: 'Invalid Entry',
+            description: 'No entry ID provided.',
+        };
+    }
+
     const entry = await getEntry(params.id);
 
     if (!entry) {
