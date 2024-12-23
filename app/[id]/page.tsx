@@ -82,7 +82,7 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
                   <div className="relative">
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                       <div className="w-16 h-16 rounded-full border-4 border-red-500/60 relative">
-                        <div className="absolute top-1/2 left-1/2 w-[100%] h-[4px] bg-red-500/45 -translate-x-1/2 -translate-y-1/2 rotate-45" />
+                        {/* <div className="absolute top-1/2 left-1/2 w-[100%] h-[4px] bg-red-500/45 -translate-x-1/2 -translate-y-1/2 rotate-45" /> */}
                       </div>
                     </div>
                     <img
@@ -92,7 +92,7 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
                     />
                   </div>
                 )}
-                <CardTitle className="text-2xl"><h1>{entry.title}</h1></CardTitle>
+                <CardTitle className="text-2xl"><h1>🚫 {entry.title}</h1></CardTitle>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
