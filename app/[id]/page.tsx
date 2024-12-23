@@ -23,12 +23,12 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-background bg-slate-50">
         <Header />
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto">
             <div className="animate-pulse">
-              <div className="h-4 w-24 bg-muted rounded mb-6" />
+              <div className="h-6 w-24 bg-muted rounded" />
               <Card className="mt-4">
                 <CardHeader>
                   <div className="flex items-center space-x-4">
@@ -50,7 +50,7 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
 
   if (error) {
     return (
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-background bg-slate-50">
         <Header />
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto text-center">
@@ -67,11 +67,11 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
   }
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background bg-slate-50">
       <Header />
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">
-          <Link href="/" className="text-muted-foreground hover:text-foreground mb-6 inline-block">
+          <Link href="/" className="text-muted-foreground hover:text-foreground inline-block">
             ← Back to list
           </Link>
 
