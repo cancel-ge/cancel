@@ -27,7 +27,7 @@ export default function Home() {
                   <a href="https://www.researchgate.net/publication/264310531_'I_am_Georgian_and_therefore_I_am_European'_Re-searching_the_Europeanness_of_Georgia" target="_blank">
                     <Paperclip className="w-4 h-4 inline-block mr-1 align-middle" />
                     <span className="inline-block align-middle italic">
-                      Why is that?
+                      What does that mean?
                     </span>
                   </a>
                 </p>

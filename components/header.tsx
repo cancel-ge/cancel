@@ -3,7 +3,7 @@
 import { ModeToggle } from "@/components/mode-toggle";
 import Link from "next/link";
 import GitHubButton from 'react-github-btn'
-import { Github, Coffee, Facebook, Instagram, Twitter } from "lucide-react";
+import { Coffee, Github, Facebook, Instagram, Twitter } from "lucide-react";
 
 export function Header() {
   return (
