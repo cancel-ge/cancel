@@ -5,11 +5,11 @@ import { Paperclip } from 'lucide-react';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background bg-slate-50">
       <Header />
       <section className="relative py-24 md:py-32 overflow-hidden">
         {/* Background gradient with overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-neutral-900 to-red-950 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-neutral-900 to-slate-950" />
 
         {/* Updated pattern overlay */}
         <div className="absolute inset-0 bg-grid-white/[0.03] bg-[size:16px]" />
@@ -52,7 +52,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Video section */}
             <div className="flex-1 relative w-full lg:w-[500px] aspect-video">
               <div className="absolute inset-0 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                 <div className="relative w-full h-full">
