@@ -5,6 +5,7 @@ export async function getEntry(id: string) {
     .from("entries")
     .select("*")
     .eq("page_slug", id)
+    .eq("status", "approved")
     .single();
 
   return data;
