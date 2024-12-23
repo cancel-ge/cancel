@@ -111,7 +111,7 @@ export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
         image_url: imageUrl,
         fact_screenshot_url: screenshotUrl || "",
         fact_url: values.fact_url || undefined,
-        description: "",
+        description: values.description || undefined,
       });
       
       toast({
@@ -170,7 +170,7 @@ export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>
-            {step === 1 ? "Cancel a company or person" : "Additional Information"}
+            {step === 1 ? "Add" : "Additional Information"}
           </DialogTitle>
           <DialogDescription>
             {step === 1 ? "Add a company or person to the database." : "Add more details about the company or person here or leave blank."}

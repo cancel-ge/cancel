@@ -28,7 +28,7 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto">
             <div className="animate-pulse">
-              <div className="h-4 w-24 bg-muted rounded mb-6" />
+              <div className="h-6 w-24 bg-muted rounded" />
               <Card className="mt-4">
                 <CardHeader>
                   <div className="flex items-center space-x-4">
@@ -71,7 +71,7 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
       <Header />
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">
-          <Link href="/" className="text-muted-foreground hover:text-foreground mb-6 inline-block">
+          <Link href="/" className="text-muted-foreground hover:text-foreground inline-block">
             ← Back to list
           </Link>
 
@@ -82,17 +82,18 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
                   <div className="relative">
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                       <div className="w-16 h-16 rounded-full border-4 border-red-500/60 relative">
-                        <div className="absolute top-1/2 left-1/2 w-[100%] h-[4px] bg-red-500/45 -translate-x-1/2 -translate-y-1/2 rotate-45" />
+                        {/* <div className="absolute top-1/2 left-1/2 w-[100%] h-[4px] bg-red-500/45 -translate-x-1/2 -translate-y-1/2 rotate-45" /> */}
                       </div>
                     </div>
                     <img
                       src={entry.image_url}
+                      title={entry.title}
                       alt={entry.title}
                       className="w-16 h-16 rounded-full object-cover"
                     />
                   </div>
                 )}
-                <CardTitle className="text-2xl"><h1>{entry.title}</h1></CardTitle>
+                <CardTitle className="text-2xl"><h1>🚫 {entry.title}</h1></CardTitle>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -102,6 +103,7 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
                 <div className="rounded-lg overflow-hidden">
                   <img
                     src={entry.fact_screenshot_url}
+                    title={entry.title}
                     alt="Evidence"
                     className="w-full"
                   />

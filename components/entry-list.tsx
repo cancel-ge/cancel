@@ -98,8 +98,8 @@ export function EntryList() {
           <Link key={entry.id} href={`/${entry.page_slug}`}>
             <Card className="cursor-pointer hover:shadow-lg transition-shadow h-full flex flex-col items-center justify-center p-6 relative">
               <div className="absolute inset-0 flex items-start justify-center pt-6 pointer-events-none">
-                <div className="w-40 h-40 mb-4 rounded-full border-8 border-red-500/30 relative">
-                  <div className="absolute top-1/2 left-1/2 w-[141%] h-[8px] bg-red-500/30 -translate-x-1/2 -translate-y-1/2 rotate-45" />
+                <div className="w-40 h-40 mb-4 rounded-full border-8 border-red-500/50 relative">
+                  {/* <div className="absolute top-1/2 left-1/2 w-[141%] h-[8px] bg-red-500/30 -translate-x-1/2 -translate-y-1/2 rotate-45" /> */}
                 </div>
               </div>
               {entry.image_url && (
@@ -111,7 +111,7 @@ export function EntryList() {
                   />
                 </div>
               )}
-              <h3 className="text-xl font-semibold text-center">{entry.title}</h3>
+              <h3 className="text-xl font-semibold text-center">🚫 {entry.title}</h3>
             </Card>
           </Link>
         ))}
