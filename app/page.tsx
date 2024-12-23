@@ -1,7 +1,7 @@
 import { EntryList } from '@/components/entry-list';
 import { Header } from '@/components/header';
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { Paperclip } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -23,6 +23,14 @@ export default function Home() {
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
                   I'm Georgian 🇬🇪 therefore<br />I'm European 🇪🇺
                 </h1>
+                <p className="text-sm text-gray-300">
+                  <a href="https://www.researchgate.net/publication/264310531_'I_am_Georgian_and_therefore_I_am_European'_Re-searching_the_Europeanness_of_Georgia" target="_blank">
+                    <Paperclip className="w-4 h-4 inline-block mr-1 align-middle" />
+                    <span className="inline-block align-middle italic">
+                      Why is that?
+                    </span>
+                  </a>
+                </p>
               </div>
               <p className="text-lg md:text-xl leading-relaxed text-gray-300 max-w-2xl mx-auto lg:mx-0">
                 Georgia’s <a href="https://www.csce.gov/press-releases/chairman-wilson-and-ranking-member-cohen-express-their-solidarity-with-the-georgian-people" target="_blank" className="text-red-500">de facto government</a> has

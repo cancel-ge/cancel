@@ -14,11 +14,11 @@ const robotoMono = Roboto_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
-  title: 'Cancel.ge - Exposing Those Silent on Georgian EU Aspirations',
-  description: 'Archive of companies and public figures not actively supporting Georgian EU membership aspirations.',
+  title: 'Cancel.ge - Highlighting Support for Georgia\'s EU Membership Aspirations',
+  description: 'A platform promoting transparency by documenting companies, public figures, and entities regarding their alignment with Georgia\'s EU membership aspirations.',
   openGraph: {
-    title: 'Cancel.ge - Exposing Those Silent on Georgian EU Aspirations',
-    description: 'Archive of companies and public figures not actively supporting Georgian EU membership aspirations.',
+    title: 'Cancel.ge - Highlighting Support for Georgia\'s EU Membership Aspirations',
+    description: 'A platform promoting transparency by documenting companies, public figures, and entities regarding their alignment with Georgia\'s EU membership aspirations.',
     url: 'https://cancel.ge',
     siteName: 'Cancel.ge',
     locale: 'en_US',
@@ -26,8 +26,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Cancel.ge - Exposing Those Silent on Georgian EU Aspirations',
-    description: 'Archive of companies and public figures not actively supporting Georgian EU membership aspirations.',
+    title: 'Cancel.ge - Highlighting Support for Georgia\'s EU Membership Aspirations',
+    description: 'A platform promoting transparency by documenting companies, public figures, and entities regarding their alignment with Georgia\'s EU membership aspirations.',
   },
   icons: {
     icon: '/favicon.ico',

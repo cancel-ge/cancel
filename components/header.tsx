@@ -19,7 +19,7 @@ export function Header() {
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-4">
 
-              <div className="h-5 w-20 text-sm">
+              <div className="hidden md:block h-5 w-20 text-sm">
                 <GitHubButton
                   href="https://github.com/cancel-ge/cancel"
                   data-color-scheme="no-preference: light; light: light; dark: light;"
