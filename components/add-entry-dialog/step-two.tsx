@@ -3,6 +3,7 @@
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ImageInput } from "@/components/ui/image-input";
+import { Textarea } from "@/components/ui/textarea";
 
 export function StepTwo({ form }: { form: any }) {
   return (
@@ -36,6 +37,23 @@ export function StepTwo({ form }: { form: any }) {
             <FormLabel>Fact URL (Optional)</FormLabel>
             <FormControl>
               <Input placeholder="Enter URL of fact source" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={form.control}
+        name="description"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Description (Optional)</FormLabel>
+            <FormControl>
+              <Textarea
+                placeholder="Enter a description (optional)"
+                {...field}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>

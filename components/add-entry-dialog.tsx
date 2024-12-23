@@ -111,7 +111,7 @@ export function AddEntryDialog({ open, onOpenChange }: AddEntryDialogProps) {
         image_url: imageUrl,
         fact_screenshot_url: screenshotUrl || "",
         fact_url: values.fact_url || undefined,
-        description: "",
+        description: values.description || undefined,
       });
       
       toast({
