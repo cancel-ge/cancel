@@ -87,6 +87,7 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
                     </div>
                     <img
                       src={entry.image_url}
+                      title={entry.title}
                       alt={entry.title}
                       className="w-16 h-16 rounded-full object-cover"
                     />
@@ -102,6 +103,7 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
                 <div className="rounded-lg overflow-hidden">
                   <img
                     src={entry.fact_screenshot_url}
+                    title={entry.title}
                     alt="Evidence"
                     className="w-full"
                   />
