@@ -13,14 +13,14 @@ import { ImageInput } from "@/components/ui/image-input";
 
 export function StepTwo({ form }: { form: any }) {
   const handlePaste = (event: React.ClipboardEvent<HTMLDivElement>) => {
-    const clipboardItems = event.clipboardData.items;
+    const clipboardItems = Array.from(event.clipboardData.items);
 
     for (const item of clipboardItems) {
       if (item.type.startsWith("image/")) {
         const file = item.getAsFile();
         if (file) {
-          form.setValue("fact_screenshot_file", file); // Set file value
-          form.setValue("fact_screenshot_url", ""); // Clear the URL field if a file is pasted
+          form.setValue("fact_screenshot_file", file);
+          form.setValue("fact_screenshot_url", "");
           return;
         }
       }
