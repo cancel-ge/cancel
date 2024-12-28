@@ -8,6 +8,7 @@ import { SocialLinkButton } from '@/components/social-link-button';
 import { useEntries } from '@/lib/entries-context';
 import { useEffect } from 'react';
 import { Header } from '@/components/header';
+import { Paragraphs } from "@/components/paragraphs";
 
 export default function EntryPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -97,7 +98,7 @@ export default function EntryPage({ params }: { params: Promise<{ id: string }> 
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-muted-foreground">{entry.description}</p>
+              <Paragraphs text={entry.description}/>
 
               {entry.fact_screenshot_url && (
                 <div className="rounded-lg overflow-hidden">
